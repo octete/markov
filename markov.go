@@ -6,22 +6,38 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	//"string"
 )
 
+/* Main variable:
+statetab will be a map with state as keys, and a slice
+to a set of suffixes. This way, we don't really need a
+complicated data structure.
+*/
+var statetab map[state][]suffix
+
 type suffix struct {
-	// a list
+	word string
 }
 
+// State is each of the two words of a prefix that will initiate
+// a markov chaing. It will point to at least one suffice.
 type state struct {
-	pref1 string
-	pref2 string
-	suf   *suffix
+	pref [2]string
+	//suffixes []string // For the suffixes I only need a list/slice
 }
 
 func main() {
+	statetab = make(map[state][]suffix)
 	fmt.Println("Markov chains")
+}
+
+// Build the hash table.
+func build() {
+
 }
 
 func lookup() {
@@ -34,4 +50,21 @@ func addSuffix() {
 
 func add() {
 
+}
+
+// readLines reads a whole file into memory
+// and returns a slice of its lines.
+func readLines(path string) ([]string, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	var lines []string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+	return lines, scanner.Err()
 }
