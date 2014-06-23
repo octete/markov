@@ -9,6 +9,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"path/filepath"
 	//"string"
 )
 
@@ -32,7 +33,14 @@ type state struct {
 
 func main() {
 	statetab = make(map[state][]suffix)
-	fmt.Println("Markov chains")
+	//fmt.Println("Markov chains")
+
+	fmt.Println(len(os.Args))
+	if len(os.Args) != 2 || os.Args[1] == "-h" || os.Args[1] == "--help" {
+		fmt.Printf("usage: %s <file1>\n",
+			filepath.Base(os.Args[0]))
+		os.Exit(1)
+	}
 }
 
 // Build the hash table.
