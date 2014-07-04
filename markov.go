@@ -7,12 +7,10 @@ package main
 
 import (
 	"bufio"
-	// "flag"
 	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
-	//"string"
 )
 
 /* Main variable:
@@ -43,8 +41,6 @@ func main() {
 	}
 	filename := os.Args[1]
 
-	// fmt.Println("The file we are going to read is: ", filename)
-
 	// Read the file and store it in memory.
 	// Wouldn't it be better to process as we go?
 	lines, err := readLines(filename)
@@ -54,19 +50,20 @@ func main() {
 	}
 	var nlines, nwords int
 
-	for r, line := range lines {
-		words := strings.Split(line, " ")
-		nwords += len(words)
-		// fmt.Println(len(words))
-		nlines = r
-	}
+	nlines, nwords, _ = build(lines)
+
 	fmt.Printf("The number of lines in %s is %d and has %d words\n",
 		filepath.Base(filename), nlines, nwords)
 }
 
 // Build the hash table.
-func build() {
-
+func build(lines []string) (nwords, nlines int, err error) {
+	for r, line := range lines {
+		words := strings.Split(line, " ")
+		nwords += len(words)
+		nlines = r
+	}
+	return nwords, nlines, err
 }
 
 func lookup() {
