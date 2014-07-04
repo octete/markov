@@ -7,9 +7,11 @@ package main
 
 import (
 	"bufio"
+	// "flag"
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	//"string"
 )
 
@@ -33,12 +35,33 @@ type state struct {
 
 func main() {
 	statetab = make(map[state][]suffix)
-	//fmt.Println("Markov chains")
+
 	if len(os.Args) != 2 || os.Args[1] == "-h" || os.Args[1] == "--help" {
 		fmt.Printf("usage: %s <file1>\n",
 			filepath.Base(os.Args[0]))
 		os.Exit(1)
 	}
+	filename := os.Args[1]
+
+	// fmt.Println("The file we are going to read is: ", filename)
+
+	// Read the file and store it in memory.
+	// Wouldn't it be better to process as we go?
+	lines, err := readLines(filename)
+	if err != nil {
+		fmt.Printf("Error reading %s", filename)
+		os.Exit(2)
+	}
+	var nlines, nwords int
+
+	for r, line := range lines {
+		words := strings.Split(line, " ")
+		nwords += len(words)
+		// fmt.Println(len(words))
+		nlines = r
+	}
+	fmt.Printf("The number of lines in %s is %d and has %d words\n",
+		filepath.Base(filename), nlines, nwords)
 }
 
 // Build the hash table.
