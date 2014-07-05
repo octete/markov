@@ -64,7 +64,7 @@ func build(lines []string) (nwords int, nlines int, err error) {
 	nwords = 0
 	nlines = 0
 	for r, line := range lines {
-		words := strings.Split(line, " ")
+		words := strings.Fields(line)
 		nwords += len(words)
 		nlines = r + 1
 	}
