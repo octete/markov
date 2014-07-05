@@ -23,6 +23,14 @@ var buildTests = []struct {
 		nlines: 2,
 	},
 	{
+		in: []string{"En un lugar",
+			"de  la mancha  vivia",
+			"un  hidalgo de la leche.",
+		},
+		nwords: 12,
+		nlines: 3,
+	},
+	{
 		in:     []string{},
 		nwords: 0,
 		nlines: 0,
