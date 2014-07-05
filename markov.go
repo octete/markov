@@ -3,7 +3,7 @@
 // This is a small program to run the markov chain program
 // from the book The Practice of Programming.
 
-package markov
+package main
 
 import (
 	"bufio"
@@ -50,18 +50,23 @@ func main() {
 	}
 	var nlines, nwords int
 
-	nlines, nwords, _ = build(lines)
+	nwords, nlines, _ = build(lines)
 
 	fmt.Printf("The number of lines in %s is %d and has %d words\n",
 		filepath.Base(filename), nlines, nwords)
 }
 
 // Build the hash table.
-func build(lines []string) (nwords, nlines int, err error) {
+//
+// For now, we are only going to return the number of words
+// and lines.
+func build(lines []string) (nwords int, nlines int, err error) {
+	nwords = 0
+	nlines = 0
 	for r, line := range lines {
 		words := strings.Split(line, " ")
 		nwords += len(words)
-		nlines = r
+		nlines = r + 1
 	}
 	return nwords, nlines, err
 }
