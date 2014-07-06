@@ -29,26 +29,69 @@ var buildTests = []struct {
 	},
 }
 
+/*
+We are passing:
+"This is Sparta. And this is Seville"
+Which should give us something like":
+{
+    {
+        pref: {"", "This"},
+    }:  {"is"},
+    {
+        pref: {"This", "is"},
+    }:  {"Sparta.", "Seville."},
+    {
+        pref: {"is", "Sparta."},
+    }:  {"And"},
+    {
+        pref: {"Sparta.", "And"},
+    }:  {"This"},
+    {
+        pref: {"And", "This"},
+    }:  {"is"},
+    {}: {"This"},
+}
+*/
 var addTests = []struct {
 	in           string
 	prefixAfter0 string
 	prefixAfter1 string
 }{
-	// {
-	// 	in:           "",
-	// 	prefixAfter0: "",
-	// 	prefixAfter1: "",
-	// },
 	{
-		in:           "word",
+		in:           "This",
 		prefixAfter0: "",
-		prefixAfter1: "word",
+		prefixAfter1: "This",
 	},
-	// {
-	// 	in:           "palabra",
-	// 	prefixAfter0: "word",
-	// 	prefixAfter1: "palabra",
-	// },
+	{
+		in:           "is",
+		prefixAfter0: "This",
+		prefixAfter1: "is",
+	},
+	{
+		in:           "Sparta.",
+		prefixAfter0: "is",
+		prefixAfter1: "Sparta.",
+	},
+	{
+		in:           "And",
+		prefixAfter0: "Sparta.",
+		prefixAfter1: "And",
+	},
+	{
+		in:           "This",
+		prefixAfter0: "And",
+		prefixAfter1: "This",
+	},
+	{
+		in:           "is",
+		prefixAfter0: "This",
+		prefixAfter1: "is",
+	},
+	{
+		in:           "Seville.",
+		prefixAfter0: "is",
+		prefixAfter1: "Seville.",
+	},
 }
 
 // func TestBuild(t *testing.T) {
@@ -80,5 +123,15 @@ func TestAdd(t *testing.T) {
 		// 	prefix) // depends on the test..
 		// assert.IsType(t, string, prefixOrig0, "prefixOrig is not string")
 	}
-	// assert.NotEmpty(t, statemap, "Statemap not empty")
+	assert.NotEmpty(t, statemap, "Statemap not empty")
+	/* statemap should have now all the words for these pairs:
+	And, This
+	"", This
+	This, is
+	is, Sparta.
+	Sparta., And
+	*/
+	// assert.NotNil(t, statemap[state{pref: "This", "is"}], "sitemap doesn't have 'This' 'is'")
+	// TODO: Add all different checks here.
+
 }

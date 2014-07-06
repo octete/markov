@@ -78,7 +78,8 @@ func addSuffix() {
 }
 
 /* We add the word on the existing prefix. */
-// add: Add the prefix if it doesn't exist. Otherwise, update table
+// add: Add the prefix if it doesn't exist. Otherwise, update table.
+// TODO: Do not accept the empty word or ""
 func add(word string) {
 	// prefix is a global variable, and it has the prefixes for the existing word.
 	// update prefix after we've added the word.
