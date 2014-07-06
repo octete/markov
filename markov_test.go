@@ -135,3 +135,22 @@ func TestAdd(t *testing.T) {
 	// TODO: Add all different checks here.
 
 }
+
+var s1 = []string{}
+var s2 = []string{"a", "b", "c"}
+var s3 = []string{"Sevilla", "Jesús", "Cigüeña", "Londoners"}
+var s4 = []string{""}
+
+var name1 = "Juan"
+var name2 = ""
+var name3 = "Sevilla"
+var name4 = "Cigüeña"
+
+// Test if a slice contains an element.
+func TestContains(t *testing.T) {
+	assert.False(t, contains(s1, name2), "Found \"\" in s1 [Empty]")
+	assert.True(t, contains(s4, name2), "Fail to find name2 in s1")
+	assert.False(t, contains(s2, name3), "Found name3 in s2")
+	assert.True(t, contains(s3, name4), "Fail to find name4 in s3")
+	assert.False(t, contains(s3, name2), "Found name2 in s3")
+}

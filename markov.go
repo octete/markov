@@ -111,3 +111,13 @@ func readLines(path string) ([]string, error) {
 	}
 	return lines, scanner.Err()
 }
+
+// contains: Search a slice to see if it contains an element
+func contains(s []string, e string) bool {
+	for _, elem := range s {
+		if e == elem {
+			return true
+		}
+	}
+	return false
+}
