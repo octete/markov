@@ -2,3 +2,4 @@ language: go
 notifications:
   irc:
       - "irc.freenode.net#terminus"
+script: go get github.com/stretchr/testify/assert && go test
