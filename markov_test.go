@@ -1,6 +1,7 @@
 package main
 
 import (
+	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -153,4 +154,18 @@ func TestContains(t *testing.T) {
 	assert.False(t, contains(s2, name3), "Found name3 in s2")
 	assert.True(t, contains(s3, name4), "Fail to find name4 in s3")
 	assert.False(t, contains(s3, name2), "Found name2 in s3")
+}
+
+func TestIntegerStuff(t *testing.T) {
+	Convey("Given some integer with a starting value", t, func() {
+		x := 2
+
+		Convey("When the integer is incremented", func() {
+			x++
+
+			Convey("The value should be greater by one", func() {
+				So(x, ShouldEqual, 2)
+			})
+		})
+	})
 }
